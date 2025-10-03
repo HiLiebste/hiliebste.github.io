@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hi Liebste!</title>
+  <link rel="icon" type="image/png" href="jura_logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles-engine"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles"></script>
+
+ <style>
+    body {
+      font-family: Helvetica;
+      text-align: center;
+      padding: 0px;
+      background: url("jurassic.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* ✨ Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-out {
+      animation: fadeOut 0.8s forwards;
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+
+    h1 {
+      font-size: 4em;
+      font-family: 'Great Vibes', cursive;
+      margin-top: 40px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    h2, h3, h4, p {
+      font-family: 'Special Elite', monospace;
+      margin-left: 20%;
+      margin-right: 20%;
+      color: white;
+    }
+
+    /* Button styling */
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #2196F3;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Special Elite', monospace;
+    }
+    button:hover {
+      background-color: #1976D2;
+      box-shadow: 0px 0px 12px rgba(33,150,243,0.7);
+    }
+#proceedEmailBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2196F3;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: 'Special Elite', monospace;
+}
+#proceedEmailBtn:hover {
+  background-color: #1976D2;
+  box-shadow: 0px 0px 12px rgba(33,150,243,0.7);
+}
+
+    /* Inputs */
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      background-color: transparent;
+      color: white;
+    }
+    input.correct { border-color: green; }
+    input.wrong { border-color: red; }
+
+    #emailInput::placeholder { color: white; opacity: 1; }
+
+    .message {
+      margin-top: 10px;
+      font-size: 20px;
+      font-family: 'Special Elite', monospace;
+    }
+    .message.green { color: #00f608; font-weight: bolder;}
+    .message.red { color: #f80404; font-weight: bolder}
+
+    .hidden { display: none; }
+
+    /* Images */
+    .options img {
+      width: 200px;
+      margin: 20px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .options img:hover {
+      border-color: #4CAF50;
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+/*
+#finalMessage img {
+  animation: pulse 1s infinite;
+}
+*/
+  </style>
+</head>
+<body>
+  <h1 class="fade-in" style="animation-delay:0.2s">Hi Liebste!</h1>
+  <h4 class="fade-in" style="animation-delay:0.6s">or Ara? or Shelza? hi there anyway!!</h4>
+  <h3 class="fade-in" style="animation-delay:1s">
+  I hope it's you, but if it's someone else... 
+  <span style="font-weight:bold; color:yellow;">you better leave</span> 
+  this private territory now, as we will quickly find out if you're an impostor!!
+</h3>
+
+  <!-- Start Button -->
+
+  <button id="startBtn" class="fade-in" style="animation-delay:1.4s">Let's do the procedure!</button>
+
+  <!-- Step 1: Email -->
+  <div id="stepEmail" class="hidden fade-in">
+    <p>First check: Enter your email (the one you use for emailing me)</p>
+    <input type="text" id="emailInput" placeholder="Enter your email">
+    <div id="emailMessage" class="message"></div>
+    <button id="proceedEmailBtn" class="hidden">Proceed</button>
+  </div>
+
+  <!-- Step 2: Questions -->
+  <div id="stepQ1" class="hidden fade-in">
+    <p>1. What animal do you associate yourself with?</p>
+    <input type="text" id="ans1">
+    <div id="msg1" class="message"></div>
+  </div>
+
+  <div id="stepQ2" class="hidden fade-in">
+    <p>2. What character of Jurassic Park do you associate me with? (only surname)</p>
+    <input type="text" id="ans2">
+    <div id="msg2" class="message"></div>
+  </div>
+
+  <div id="stepQ3" class="hidden fade-in">
+    <p>3. What animal do I associate you with?</p>
+    <input type="text" id="ans3">
+    <div id="msg3" class="message"></div>
+  </div>
+
+  <!-- Final Message -->
+  <div id="finalMessage" class="hidden fade-in">
+    <h2>🎉 Now that I finally checked and now for sure that it's you...</h2>
+    <h1>🥳 HAPPY BIRTHDAY!! 🥳</h1>
+    <img src="dino.gif" alt="Cake GIF">
+    <p>If you thought that was it, no it isn't...<br>
+       There's something else! But first go to WhatsApp and text me which food you'd like more:</p>
+    <div class="options">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/RedDot_Burger.jpg" alt="Burgers">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg" alt="Pizza">
+    </div>
+    <p>also pls lmk if this was cringe as hell, I suck at design :P</p>
+  </div>
+
+
+  <script>
+    const gfEmail = "liebstaralim@gmail.com"; // <-- put her email here
+
+    const startBtn = document.getElementById("startBtn");
+    const stepEmail = document.getElementById("stepEmail");
+
+    // Show email step after button click
+    startBtn.addEventListener("click", () => {
+      startBtn.classList.add("fade-out");
+      document.querySelector("h1").classList.add("fade-out");
+      document.querySelector("h4").classList.add("fade-out");
+      document.querySelector("h3").classList.add("fade-out");
+
+      setTimeout(() => {
+        startBtn.classList.add("hidden");
+        document.querySelector("h1").classList.add("hidden");
+        document.querySelector("h4").classList.add("hidden");
+        document.querySelector("h3").classList.add("hidden");
+        stepEmail.classList.remove("hidden");
+      }, 800);
+    });
+
+    const emailInput = document.getElementById("emailInput");
+    const emailMessage = document.getElementById("emailMessage");
+
+    emailInput.addEventListener("input", () => {
+  const value = emailInput.value.trim().toLowerCase();
+  const proceedBtn = document.getElementById("proceedEmailBtn");
+
+  if (value === gfEmail.toLowerCase()) {
+    emailInput.classList.add("correct");
+    emailInput.classList.remove("wrong");
+    emailMessage.textContent = "YUPPIE that's you!!! But to be 100% sure, I have to do a two-factor authentication, so to speak.";
+    emailMessage.className = "message green";
+
+    // Show Proceed button
+    proceedBtn.classList.remove("hidden");
+
+  } else {
+    emailInput.classList.add("wrong");
+    emailInput.classList.remove("correct");
+    emailMessage.textContent = "Wrong email. Are you trying to spy here??";
+    emailMessage.className = "message red";
+
+    // Hide Proceed button if wrong again
+    proceedBtn.classList.add("hidden");
+  }
+});
+
+// Proceed button click → go to Q1
+document.getElementById("proceedEmailBtn").addEventListener("click", () => {
+  stepEmail.classList.add("hidden");
+  document.getElementById("stepQ1").classList.remove("hidden");
+});
+
+
+    function setupQuestion(inputId, msgId, correctAnswer, nextStepId, final=false) {
+      const input = document.getElementById(inputId);
+      const msg = document.getElementById(msgId);
+      input.addEventListener("input", () => {
+        if (input.value.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+          input.classList.add("correct");
+          input.classList.remove("wrong");
+          msg.textContent = "✔ Yuppie!";
+          msg.className = "message green";
+          setTimeout(() => {
+            document.getElementById(inputId).parentElement.classList.add("hidden");
+            if (final) {
+              document.getElementById("finalMessage").classList.remove("hidden");
+            } else {
+              document.getElementById(nextStepId).classList.remove("hidden");
+            }
+          }, 800);
+        } else {
+          input.classList.add("wrong");
+          input.classList.remove("correct");
+          msg.textContent = "✘ nah wrong bro, try again";
+          msg.className = "message red";
+        }
+      });
+    }
+
+    setupQuestion("ans1", "msg1", "velociraptor", "stepQ2");
+    setupQuestion("ans2", "msg2", "Wu", "stepQ3");
+    setupQuestion("ans3", "msg3", "parrot", null, true);
+ </script>
+
+  <div id="tsparticles"></div>
+
+</body>
+</html>
