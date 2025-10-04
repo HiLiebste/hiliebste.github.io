@@ -20,7 +20,6 @@
       overflow-x: hidden;
     }
 
-    /* ✨ Animations */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -59,7 +58,6 @@
       color: white;
     }
 
-    /* Button styling */
     button {
       margin-top: 20px;
       padding: 12px 25px;
@@ -118,7 +116,7 @@
 
     .hidden { display: none; }
 
-    /* Images */
+
     .options img {
       width: 200px;
       margin: 20px;
@@ -153,11 +151,10 @@
   this private territory now, as we will quickly find out if you're an impostor!!
 </h3>
 
-  <!-- Start Button -->
+
 
   <button id="startBtn" class="fade-in" style="animation-delay:1.4s">Let's do the procedure!</button>
 
-  <!-- Step 1: Email -->
   <div id="stepEmail" class="hidden fade-in">
     <p>First check: Enter your email (the one you use for emailing me)</p>
     <input type="text" id="emailInput" placeholder="Enter your email">
@@ -165,7 +162,6 @@
     <button id="proceedEmailBtn" class="hidden">Proceed</button>
   </div>
 
-  <!-- Step 2: Questions -->
   <div id="stepQ1" class="hidden fade-in">
     <p>1. What animal do you associate yourself with?</p>
     <input type="text" id="ans1">
@@ -184,7 +180,6 @@
     <div id="msg3" class="message"></div>
   </div>
 
-  <!-- Final Message -->
   <div id="finalMessage" class="hidden fade-in">
     <h2>🎉 Now that I finally checked and now for sure that it's you...</h2>
     <h1 id = "hb">🥳 HAPPY BIRTHDAY!! 🥳</h1>
@@ -200,12 +195,11 @@
 
 
   <script>
-    const gfEmail = "liebstaralim@gmail.com"; // <-- put her email here
+    const gfEmail = "liebstaralim@gmail.com";
 
     const startBtn = document.getElementById("startBtn");
     const stepEmail = document.getElementById("stepEmail");
 
-    // Show email step after button click
     startBtn.addEventListener("click", () => {
       startBtn.classList.add("fade-out");
       document.querySelector("h1").classList.add("fade-out");
@@ -233,8 +227,6 @@
     emailInput.classList.remove("wrong");
     emailMessage.textContent = "YUPPIE that's you!!! But to be 100% sure, I have to do a two-factor authentication, so to speak.";
     emailMessage.className = "message green";
-
-    // Show Proceed button
     proceedBtn.classList.remove("hidden");
 
   } else {
@@ -248,7 +240,6 @@
   }
 });
 
-// Proceed button click → go to Q1
 document.getElementById("proceedEmailBtn").addEventListener("click", () => {
   stepEmail.classList.add("hidden");
   document.getElementById("stepQ1").classList.remove("hidden");
